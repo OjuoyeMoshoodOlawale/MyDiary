@@ -1,0 +1,151 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="asset/css/main.css" />
+
+    <title>MyDairy | View/Edit</title>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="./dashboard.html">
+          <div class="logo">
+            <img
+              src="./asset/icon/open-book_2702134.png"
+              alt=""
+              srcset=""
+            />MyDiary
+          </div>
+        </a>
+        <p class="dashboard-msg">
+          Welcome back, <span id="user_email"></span>!
+        </p>
+        <div class="dashboard-action">
+          <a href="./dashboard.html" class="btn btn-primary-outline">
+            <img src="" alt="" />Home</a
+          >
+          <a href="./create.html" class="btn btn-primary">
+            <img src="" alt="" />Add New Entry</a
+          >
+          <a href="#0" class="btn btn-primary-outline">
+            <img src="" alt="" />EXIT</a
+          >
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="content">
+        <form action="" class="diary-entry-form">
+          <h1>View / Edit Diary Entry</h1>
+          <div style="display: flex; justify-content: space-between">
+            <p>You can view or update your diary entry below.</p>
+            <p id="last-modified">Last Modify: 30.00</p>
+          </div>
+
+          <label for="title">Title</label> <br />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Entry title"
+            required
+          />
+          <br />
+          <label for="content">Content</label> <br />
+          <textarea
+            id="content"
+            name="content"
+            placeholder="Write your diary entry here..."
+            rows="8"
+            required
+          ></textarea>
+          <br />
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 MyDiary. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      const userData = JSON.parse(localStorage.getItem("user"));
+      document.getElementById("user_email").innerText =
+        userData.data.user.email;
+
+      // Get diary entry ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      let entryId = urlParams.get("id");
+
+      // Fetch and populate the form with the entry data
+      fetch(
+        `https://tunga-diary-api.onrender.com/api/fullstack/diary/entry/${entryId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userData.token}`,
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status == 200) {
+            document.getElementById("title").value = data.data.title;
+            document.getElementById("content").value = data.data.content;
+            document.getElementById(
+              "last-modified"
+            ).innerText = `Last Modified: ${new Date(
+              data.data.updatedAt
+            ).toLocaleString()}`;
+          } else {
+            // Optionally handle error
+            // alert("Failed to load diary entry.");
+          }
+        });
+
+      // Handle form submission to update the diary entry
+      document
+        .querySelector(".diary-entry-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          fetch(
+            `https://tunga-diary-api.onrender.com/api/fullstack/diary/update/${entryId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userData.token}`,
+              },
+              body: JSON.stringify({
+                title: document.getElementById("title").value,
+                content: document.getElementById("content").value,
+              }),
+            }
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status == 200) {
+                alert("Diary entry updated successfully!");
+                // Optionally, redirect or clear form
+              } else {
+                alert("Failed to update diary entry.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error updating diary entry:", error);
+              alert("Failed to update diary entry.");
+            });
+        });
+    </script>
+  </body>
+</html>

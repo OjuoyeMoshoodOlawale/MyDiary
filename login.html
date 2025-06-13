@@ -1,0 +1,112 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="asset/css/main.css" />
+
+    <title>MyDairy | login</title>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="./index.html">
+          <div class="logo">
+            <img
+              src="./asset/icon/open-book_2702134.png"
+              alt=""
+              srcset=""
+            />MyDiary
+          </div>
+        </a>
+        <a href="./login.html" class="btn btn-primary-outline">Sign In</a>
+      </nav>
+    </header>
+    <main>
+      <section class="login">
+        <form action="" class="login-form" method="post">
+          <h1>Login to MyDiary</h1>
+          <p>Enter your credentials to access your diary</p>
+          <label for="#email">Email</label> <br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+          <br />
+          <label for="#password">Password</label> <br />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+          <br />
+          <p>
+            Don't have an account?
+            <a href="./sign-up.html" class="signup-link">Sign Up</a>
+          </p>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <!--         
+        <div class="call-to-action">
+          <a class="btn btn-primary" href="">Start writing today</a>
+          <a class="btn btn-primary-outline" href="">Learn more</a>
+        </div> -->
+      </section>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 MyDiary. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      document
+        .querySelector(".login-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          // Here you would typically send the email and password to your server for authentication
+          fetch(
+            "https://tunga-diary-api.onrender.com/api/fullstack/auth/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            }
+          )
+            .then(async (response) => {
+              const text = await response.text();
+              return text ? JSON.parse(text) : {};
+            })
+            .then((data) => {
+              //document.write(JSON.stringify(data));
+
+              if (data.status === "success") {
+                localStorage.setItem("user", JSON.stringify(data));
+
+                window.location.href = "./dashboard.html";
+              } else {
+                alert(data.message || "Login failed");
+              }
+            })
+            .catch((error) => {
+              alert(error.message || "An error occurred during login");
+              console.error(error);
+            });
+        });
+    </script>
+  </body>
+</html>

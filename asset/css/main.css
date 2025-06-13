@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+:root {
+  --primary: #9833e2;
+  --white: #eceff1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, "Roboto", sans-serif;
+  font-size: 1.2rem;
+}
+body {
+  background-color: var(--white);
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: inset;
+}
+nav .logo {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 2rem;
+  padding-left: 2.5rem;
+}
+nav .logo img {
+  width: 50px;
+}
+.btn {
+  margin: 1.4rem 0;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+.btn-primary-outline {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-danger-outline {
+  border: 2px solid red;
+  color: red;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.hero h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+.hero p {
+  font-size: 1.5rem;
+  margin: 1rem 18rem;
+  text-align: center;
+  color: gray;
+}
+.hero .call-to-action {
+  display: flex;
+  justify-content: center;
+}
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+.card {
+  width: 100%;
+  max-width: 510px;
+  margin: 0.3rem auto;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.card h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.card p {
+  font-size: 1.2rem;
+  color: gray;
+}
+.testimonials,
+hero .call-to-action {
+  background-color: #fff;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+.testimonials-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+.testimonial {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.testimonial p {
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-style: italic;
+}
+.testimonial span {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.star-icon {
+  /* fill: #f39c12; */ /* This only works for inline SVG, not for SVG in <img> */
+  filter: invert(62%) sepia(72%) saturate(749%) hue-rotate(1deg)
+    brightness(101%) contrast(101%);
+  width: 2rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonials h2,
+.call-to-action h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.call-to-action p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: gray;
+  margin-bottom: 1rem;
+}
+.call-to-action-session .btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  width: fit-content;
+  min-width: 120px;
+  max-width: 250px;
+}
+.call-to-action-session h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 3rem;
+}
+.call-to-action-session p {
+  font-size: 1.2rem;
+  text-align: center;
+  color: gray;
+  margin-bottom: 1rem;
+}
+footer {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 2rem 0;
+  margin-top: 3rem;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer-nav a {
+  color: var(--white);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #d1b3f7;
+  text-decoration: underline;
+}
+
+/* // login page */
+.login-form,
+.signup-form,
+.diary-entry-form {
+  max-width: 70vw;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.login-form p,
+.signup-form p,
+.diary-entry-form p {
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 1rem;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.dashboard-action {
+  justify-self: center;
+  align-self: center;
+}
+.dashboard-msg {
+  justify-self: flex-end;
+  align-self: center;
+  font-size: 1.2rem;
+  color: gray;
+  margin: 1rem;
+}
+
+.diary-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+.diary-card p {
+  font-size: 1.2rem;
+  color: gray;
+  margin-bottom: 1rem;
+}
+.diary-card {
+  margin: 1rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.card-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+  /* position: absolute;
+  bottom: 0;
+  left: 0; */
+}

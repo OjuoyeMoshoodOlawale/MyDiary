@@ -1,0 +1,134 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="asset/css/main.css" />
+
+    <title>MyDairy | Dashbooard</title>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <a href="./dashboard.html">
+          <div class="logo">
+            <img
+              src="./asset/icon/open-book_2702134.png"
+              alt=""
+              srcset=""
+            />MyDiary
+          </div>
+        </a>
+        <p class="dashboard-msg">
+          Welcome back, <span id="user_email"></span>!
+        </p>
+        <div class="dashboard-action">
+          <a href="./dashboard.html" class="btn btn-primary-outline">
+            <img src="" alt="" />Home</a
+          >
+          <a href="./create.html" class="btn btn-primary">
+            <img src="" alt="" />Add New Entry</a
+          >
+          <a href="#0" class="btn btn-primary-outline">
+            <img src="" alt="" />EXIT</a
+          >
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="content">
+        <div class="diary-list" id="diary_list"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 MyDiary. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </footer>
+    <script>
+      const userData = JSON.parse(localStorage.getItem("user"));
+      user_email = document.getElementById("user_email").innerText =
+        userData.data.user.email;
+
+      function getDiaryEntries() {
+        fetch(
+          "https://tunga-diary-api.onrender.com/api/fullstack/diary/entries",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userData.token}`,
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle diary entries data here
+
+            const result = data.data;
+            // document.write(result[0].title);
+            let diaryList = document.getElementById("diary_list");
+            diaryList.innerHTML = "";
+
+            for (entry of result) {
+              let card = `<div class="card diary-card">
+            <h2>${entry.title}</h2>
+            <p class="date"><i>Last Modified ${new Date(
+              entry.updatedAt
+            ).toLocaleString()}</i></p>
+            <p>
+              ${entry.content.substring(0, 100)}...
+            </p>
+            <div class="card-action">
+                <a href="edit.html?id=${
+                  entry.id
+                }" class="btn btn-primary-outline">View/Edit</a>
+              <a href="#0" class="btn btn-danger-outline" onclick="deleteDiaryEntry('${
+                entry.id
+              }')" rel="">Delete</a>
+            </div>
+          </div>`;
+              diaryList.innerHTML += card;
+            }
+            // Example: render entries to the page
+            //
+          })
+          .catch((error) => {
+            console.error("Error fetching diary entries:", error);
+          });
+      }
+
+      getDiaryEntries();
+
+      // delete
+      function deleteDiaryEntry(id) {
+        if (!confirm("Are you sure you want to delete this diary entry?")) {
+          return;
+        }
+        fetch(
+          `https://tunga-diary-api.onrender.com/api/fullstack/diary/delete/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userData.token}`,
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            alert(data.message || "Diary entry deleted successfully");
+            getDiaryEntries();
+          })
+          .catch((error) => {
+            console.error("Error deleting diary entry:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
