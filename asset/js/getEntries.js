@@ -22,9 +22,10 @@ function getDiaryEntries() {
       for (entry of result) {
         let card = `<div class="card diary-card">
        <h2>${entry.title}</h2>
-       <p class="date"><i>Last Modified ${new Date(
+       <p class="date" ><i>Last Modified ${new Date(
          entry.updatedAt
        ).toLocaleString()}</i></p>
+     
        <p>
          ${entry.content.substring(0, 100)}...
        </p>
