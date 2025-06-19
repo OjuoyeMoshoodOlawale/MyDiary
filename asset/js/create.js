@@ -1,6 +1,10 @@
 const userData = JSON.parse(localStorage.getItem("user"));
-user_email = document.getElementById("user_email").innerText =
-  userData.data.user.email;
+
+if (!userData) {
+  alert("e");
+  window.location.href = "./login.html";
+}
+document.getElementById("user_email").innerText = userData.data.user.email;
 
 // Add event listener for form submission
 document
