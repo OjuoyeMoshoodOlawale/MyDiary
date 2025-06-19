@@ -1,14 +1,17 @@
-# Tunga Final Project - MyDiary
+# MyDiary – Tunga Final Project
 
-Welcome to **MyDiary**, a personal digital diary web application built as the final project for the Tunga program.
+Welcome to **MyDiary**, a digital diary web app created as the final project for the Tunga program.
 
 ## Features
 
-- Secure & private diary entries
-- User authentication (sign up & login)
+- User authentication (sign up, login, logout)
 - Create, view, edit, and delete diary entries
-- Responsive and modern UI
-- Hosted on [GitHub Pages](https://your-username.github.io/your-repo-name/)
+- Responsive, modern interface
+- Hosted on GitHub Pages
+
+## Live Demo
+
+[View MyDiary on GitHub Pages](https://ojuoyemoshoodolawale.github.io/MyDiary/dashboard.html)
 
 ## Project Structure
 
@@ -20,39 +23,34 @@ Welcome to **MyDiary**, a personal digital diary web application built as the fi
 ├── dashboard.html
 ├── create.html
 ├── edit.html
-├── text.json
-└── asset/
-    ├── css/
-    │   └── main.css
-    ├── js/
-    │   └── index.js
-    └── icon/
-        ├── open-book_2702134.png
-        └── star-solid.svg
+├── asset/
+│   ├── css/
+│   │   └── main.css
+│   ├── js/
+│   │   ├── getEntries.js
+│   │   ├── delete.js
+│   │   ├── logout.js
+│   │   └── index.js
+│   └── icon/
+│       └── open-book_2702134.png
+└── text.json
 ```
 
 ## Getting Started
 
-1. **Clone this repository:**
-
+1. **Clone the repository:**
    ```sh
    git clone https://github.com/your-username/your-repo-name.git
    ```
+2. **Open `index.html` in your browser** or visit the GitHub Pages link above.
 
-2. **Open `index.html` in your browser** or deploy the repository using GitHub Pages.
+## API
 
-3. **API Backend:**  
-   This project uses a remote API for authentication and diary management:
-   ```
-   https://tunga-diary-api.onrender.com/api/fullstack/
-   ```
+This project uses a remote API for authentication and diary management:
 
-## Usage
-
-- **Sign Up:** Create a new account via the sign-up page.
-- **Login:** Access your diary dashboard after logging in.
-- **Create Entry:** Add new diary entries from the dashboard.
-- **Edit/Delete:** Manage your entries easily.
+```
+https://tunga-diary-api.onrender.com/api/fullstack/
+```
 
 ## License
 
