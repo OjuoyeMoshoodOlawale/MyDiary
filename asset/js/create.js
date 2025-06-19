@@ -1,16 +1,16 @@
 const userData = JSON.parse(localStorage.getItem("user"));
 
 if (!userData) {
-  alert("e");
   window.location.href = "./login.html";
 }
 document.getElementById("user_email").innerText = userData.data.user.email;
-
-// Add event listener for form submission
+const btnLoader = document.getElementById("btnLoader");
 document
   .querySelector(".diary-entry-form")
   .addEventListener("submit", function (e) {
     e.preventDefault();
+
+    btnLoader.style.display = "inline-block";
 
     fetch("https://tunga-diary-api.onrender.com/api/fullstack/diary/create", {
       method: "POST",
@@ -33,5 +33,8 @@ document
       .catch((error) => {
         console.error("Error creating diary entry:", error);
         alert("Failed to add diary entry.");
+      })
+      .finally(() => {
+        btnLoader.style.display = "none";
       });
   });

@@ -1,10 +1,13 @@
+const btnLoader = document.getElementById("btnLoader");
 document
   .querySelector(".login-form")
   .addEventListener("submit", function (event) {
     event.preventDefault();
+
+    btnLoader.style.display = "inline-block";
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    
+
     fetch("https://tunga-diary-api.onrender.com/api/fullstack/auth/login", {
       method: "POST",
       headers: {
@@ -30,5 +33,8 @@ document
       .catch((error) => {
         alert(error.message || "An error occurred during login");
         console.error(error);
+      })
+      .finally(() => {
+        btnLoader.style.display = "none";
       });
   });

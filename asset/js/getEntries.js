@@ -1,12 +1,21 @@
 let userData = JSON.parse(localStorage.getItem("user"));
+const loaderOverlay = document.getElementById("loaderOverlay");
+function showLoader() {
+  loaderOverlay.style.display = "flex";
+}
+
+function hideLoader() {
+  loaderOverlay.style.display = "none";
+}
+
 if (!userData) {
-  alert("e");
   window.location.href = "./login.html";
 }
 user_email = document.getElementById("user_email").innerText =
   userData.data.user.email;
 
 function getDiaryEntries() {
+  showLoader();
   fetch("https://tunga-diary-api.onrender.com/api/fullstack/diary/entries", {
     method: "GET",
     headers: {
@@ -22,6 +31,10 @@ function getDiaryEntries() {
       // document.write(result[0].title);
       let diaryList = document.getElementById("diary_list");
       diaryList.innerHTML = "";
+      if (!result || result.length === 0) {
+        diaryList.innerHTML = "No Existing Records";
+        return;
+      }
 
       for (entry of result) {
         let card = `<div class="card diary-card">
@@ -44,11 +57,12 @@ function getDiaryEntries() {
      </div>`;
         diaryList.innerHTML += card;
       }
-      // Example: render entries to the page
-      //
     })
     .catch((error) => {
       console.error("Error fetching diary entries:", error);
+    })
+    .finally(() => {
+      hideLoader();
     });
 }
 

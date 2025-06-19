@@ -1,6 +1,5 @@
 const userData = JSON.parse(localStorage.getItem("user"));
 if (!userData) {
-  alert("e");
   window.location.href = "./login.html";
 }
 document.getElementById("user_email").innerText = userData.data.user.email;

@@ -1,10 +1,11 @@
 
 // Handle form submission to update the diary entry
+const btnLoader = document.getElementById("btnLoader");
 document
   .querySelector(".diary-entry-form")
   .addEventListener("submit", function (e) {
     e.preventDefault();
-
+    btnLoader.style.display = "inline-block";
     fetch(
       `https://tunga-diary-api.onrender.com/api/fullstack/diary/update/${entryId}`,
       {
@@ -30,5 +31,8 @@ document
       .catch((error) => {
         console.error("Error updating diary entry:", error);
         alert("Failed to update diary entry.");
+      })
+      .finally(() => {
+        btnLoader.style.display = "none";
       });
   });
