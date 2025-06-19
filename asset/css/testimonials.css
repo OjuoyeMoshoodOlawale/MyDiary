@@ -1,0 +1,53 @@
+.testimonials,
+.hero .call-to-action {
+  background-color: #fff;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonials-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.testimonial {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.testimonial p {
+  font-size: 1rem;
+  color: gray;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.testimonial span {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.star-icon {
+  filter: invert(62%) sepia(72%) saturate(749%) hue-rotate(1deg)
+    brightness(101%) contrast(101%);
+  width: 2rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.testimonials h2,
+.call-to-action h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}

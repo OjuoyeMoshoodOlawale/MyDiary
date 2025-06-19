@@ -1,5 +1,9 @@
-let userData = JSON.parse(localStorage.getItem("user"));
+// Constants
 const loaderOverlay = document.getElementById("loaderOverlay");
+const diaryList = document.getElementById("diary_list");
+const userEmailDisplay = document.getElementById("user_email");
+
+// Utilities
 function showLoader() {
   loaderOverlay.style.display = "flex";
 }
@@ -8,14 +12,46 @@ function hideLoader() {
   loaderOverlay.style.display = "none";
 }
 
-if (!userData) {
+function redirectToLogin() {
   window.location.href = "./login.html";
 }
-user_email = document.getElementById("user_email").innerText =
-  userData.data.user.email;
 
+function createDiaryCard(entry) {
+  const updatedAt = new Date(entry.updatedAt).toLocaleString();
+
+  return ` 
+    <div class="card diary-card">
+      <h2>${entry.title}</h2>
+      <p class="date"><i>Last Modified ${updatedAt}</i></p>
+      <p>${entry.content.substring(0, 100)}...</p>
+      <div class="card-action">
+        <a href="edit.html?id=${
+          entry.id
+        }" class="btn btn-primary-outline">View/Edit</a>
+        <a href="#0" class="btn btn-danger-outline" onclick="deleteDiaryEntry('${
+          entry.id
+        }')">Delete</a>
+      </div>
+    </div>
+  `;
+}
+
+function renderDiaryEntries(entries) {
+  diaryList.innerHTML = "";
+
+  if (!entries || entries.length === 0) {
+    diaryList.innerHTML = `<p style="text-align: center;">No Existing Records</p>`;
+    return;
+  }
+
+  const cards = entries.map(createDiaryCard).join("");
+  diaryList.innerHTML = cards;
+}
+
+// Main
 function getDiaryEntries() {
   showLoader();
+
   fetch("https://tunga-diary-api.onrender.com/api/fullstack/diary/entries", {
     method: "GET",
     headers: {
@@ -24,46 +60,19 @@ function getDiaryEntries() {
     },
   })
     .then((response) => response.json())
-    .then((data) => {
-      // Handle diary entries data here
-
-      const result = data.data;
-      // document.write(result[0].title);
-      let diaryList = document.getElementById("diary_list");
-      diaryList.innerHTML = "";
-      if (!result || result.length === 0) {
-        diaryList.innerHTML = "No Existing Records";
-        return;
-      }
-
-      for (entry of result) {
-        let card = `<div class="card diary-card">
-       <h2>${entry.title}</h2>
-       <p class="date" ><i>Last Modified ${new Date(
-         entry.updatedAt
-       ).toLocaleString()}</i></p>
-     
-       <p>
-         ${entry.content.substring(0, 100)}...
-       </p>
-       <div class="card-action">
-           <a href="edit.html?id=${
-             entry.id
-           }" class="btn btn-primary-outline">View/Edit</a>
-         <a href="#0" class="btn btn-danger-outline" onclick="deleteDiaryEntry('${
-           entry.id
-         }')" rel="">Delete</a>
-       </div>
-     </div>`;
-        diaryList.innerHTML += card;
-      }
-    })
+    .then((data) => renderDiaryEntries(data.data))
     .catch((error) => {
       console.error("Error fetching diary entries:", error);
     })
-    .finally(() => {
-      hideLoader();
-    });
+    .finally(hideLoader);
 }
 
-getDiaryEntries();
+// Initialization
+const userData = JSON.parse(localStorage.getItem("user"));
+
+if (!userData || !userData.data || !userData.token) {
+  redirectToLogin();
+} else {
+  userEmailDisplay.innerText = userData.data.user.email;
+  getDiaryEntries();
+}

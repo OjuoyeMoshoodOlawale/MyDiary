@@ -1,0 +1,23 @@
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: inset;
+}
+
+nav .logo {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 2rem;
+  padding-left: 2.5rem;
+}
+
+a img {
+  width: 1rem;
+  vertical-align: middle;
+  margin: 0.2rem;
+}
+
+nav .logo img {
+  width: 50px;
+}

@@ -1,4 +1,4 @@
-l//et userData = JSON.parse(localStorage.getItem("user"));
+l; //et userData = JSON.parse(localStorage.getItem("user"));
 function deleteDiaryEntry(id) {
   if (!confirm("Are you sure you want to delete this diary entry?")) {
     return;

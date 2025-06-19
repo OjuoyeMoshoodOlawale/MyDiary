@@ -1,0 +1,16 @@
+.hero h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1rem;
+  margin: 1rem 18rem;
+  text-align: center;
+  color: gray;
+}
+
+.hero .call-to-action {
+  display: flex;
+  justify-content: center;
+}

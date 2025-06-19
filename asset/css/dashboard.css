@@ -1,0 +1,56 @@
+.dashboard-action {
+  justify-self: center;
+  align-self: center;
+}
+
+.dashboard-msg {
+  justify-self: flex-end;
+  align-self: center;
+  font-size: 1.2rem;
+  color: gray;
+  margin: 1rem;
+}
+
+.dashboard-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+  text-align: center;
+}
+
+.diary-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.diary-card {
+  margin: 1rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.diary-card h2 {
+  margin: 0;
+}
+
+.diary-card p {
+  margin: 1rem 0;
+  color: gray;
+}
+
+.diary-card .date i {
+  font-size: 0.9rem;
+  color: var(--primary);
+}
+
+.card-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}

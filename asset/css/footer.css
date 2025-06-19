@@ -1,0 +1,35 @@
+footer {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 2rem 0;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-content p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer-nav a {
+  color: var(--white);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #d1b3f7;
+  text-decoration: underline;
+}

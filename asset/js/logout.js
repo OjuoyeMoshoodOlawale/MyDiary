@@ -1,16 +1,29 @@
 function logout(user) {
-  // Send logout request to server with Bearer authentication
-  fetch("https://tunga-diary-api.onrender.com/api/fullstack/auth/logout", {
+  const API_URL =
+    "https://tunga-diary-api.onrender.com/api/fullstack/auth/logout";
+  const token = user?.token;
+
+  if (!token) {
+    redirectToLogin();
+    return;
+  }
+
+  fetch(API_URL, {
     method: "POST",
     credentials: "include",
     headers: {
-      Authorization: `Bearer ${userData.token}`,
+      Authorization: `Bearer ${token}`,
     },
   }).finally(() => {
-    // Clear the session storage
-    localStorage.clear();
-
-    // Redirect to the login page
-    window.location.href = "./login.html";
+    clearSessionAndRedirect();
   });
+}
+
+function clearSessionAndRedirect() {
+  localStorage.clear();
+  redirectToLogin();
+}
+
+function redirectToLogin() {
+  window.location.href = "./login.html";
 }

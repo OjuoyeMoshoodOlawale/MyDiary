@@ -1,4 +1,3 @@
-
 // Handle form submission to update the diary entry
 const btnLoader = document.getElementById("btnLoader");
 document
