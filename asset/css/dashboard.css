@@ -48,7 +48,7 @@
   color: var(--primary);
 }
 
-.hero .card-action {
+.card-action {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
