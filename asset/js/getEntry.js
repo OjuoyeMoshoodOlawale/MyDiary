@@ -4,11 +4,9 @@ if (!userData) {
 }
 document.getElementById("user_email").innerText = userData.data.user.email;
 
-// Get diary entry ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 let entryId = urlParams.get("id");
 
-// Fetch and populate the form with the entry data
 fetch(
   `https://tunga-diary-api.onrender.com/api/fullstack/diary/entry/${entryId}`,
   {
